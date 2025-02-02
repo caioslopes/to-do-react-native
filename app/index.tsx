@@ -1,15 +1,9 @@
-import { Text, View } from "react-native";
+import { TodoType } from "@/@Types/TodoType";
+import TodosProvider from "@/contexts/TodosProvider";
+import { todosStoraged } from "@/storage/todos";
+import Home from "@/views/Home/Home";
+import { useEffect, useState } from "react";
 
 export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  );
+  return <Home />;
 }
