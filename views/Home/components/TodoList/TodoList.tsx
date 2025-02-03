@@ -1,6 +1,6 @@
 import React from "react";
 import TodoItem from "./components/TodoItem";
-import { View } from "react-native";
+import { FlatList } from "react-native";
 import useTodos from "@/hooks/useTodos";
 
 export default function TodoList() {
@@ -10,16 +10,18 @@ export default function TodoList() {
 
   return (
     <>
-      <View className="gap-3">
-        {todos.map((todo) => (
+      <FlatList
+        data={todos}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => (
           <TodoItem
-            key={todo.id}
-            todo={todo}
+            key={item.id}
+            todo={item}
             removeTodo={removeTodo}
             handleDone={handleDone}
           />
-        ))}
-      </View>
+        )}
+      />
     </>
   );
 }

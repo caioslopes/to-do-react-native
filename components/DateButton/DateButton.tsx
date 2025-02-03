@@ -9,12 +9,12 @@ type Props = {
 export default function DateButton({ date }: Props) {
   const day = date.getDate();
   const monthName = date
-    .toLocaleString("pt-BR", { month: "short" })
+    .toLocaleString("pt-BR", { weekday: "short" })
     .replace(".", "");
   return (
     <>
-      <Box className="w-fit">
-        <Button className="flex flex-col h-fit py-2 px-4 gap-0">
+      <Box className="w-fit mr-3">
+        <Button className="flex flex-col h-fit py-4 px-6 gap-0 rounded-xl">
           <ButtonText size="md" className="font-extrabold">
             {day}
           </ButtonText>

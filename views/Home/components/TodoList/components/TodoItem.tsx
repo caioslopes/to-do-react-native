@@ -13,6 +13,7 @@ import { Heading } from "@/components/ui/heading";
 import { CheckIcon, StarIcon, TrashIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import React from "react";
+import { View } from "react-native";
 
 type Props = {
   todo: TodoType;
@@ -27,7 +28,7 @@ export default function TodoItem({ todo, removeTodo, handleDone }: Props) {
 
   return (
     <>
-      <Card size="sm" variant="outline" className="rounded-2xl">
+      <Card size="sm" variant="outline" className="rounded-2xl mb-4">
         {/* <Box className="w-16">
           <Badge size="sm" variant="solid" action="success" className="gap-1">
             <BadgeText>Novo</BadgeText>
