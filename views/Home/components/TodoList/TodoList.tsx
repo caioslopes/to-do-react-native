@@ -1,18 +1,23 @@
 import React from "react";
 import TodoItem from "./components/TodoItem";
 import { View } from "react-native";
-import { TodoType } from "@/@Types/TodoType";
+import useTodos from "@/hooks/useTodos";
 
-type Props = {
-  todos: TodoType[];
-};
+export default function TodoList() {
+  const { todos, removeTodo, handleDone } = useTodos();
 
-export default function TodoList({ todos }: Props) {
+  //const notDoneTodo = todos.filter((todo) => todo.doneAt === undefined);
+
   return (
     <>
       <View className="gap-3">
         {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} />
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            removeTodo={removeTodo}
+            handleDone={handleDone}
+          />
         ))}
       </View>
     </>

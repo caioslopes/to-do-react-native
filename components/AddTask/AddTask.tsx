@@ -10,14 +10,12 @@ import { Heading } from "../ui/heading";
 import { Fab, FabIcon } from "../ui/fab";
 import { AddIcon } from "../ui/icon";
 import TaskForm from "./components/TaskForm";
-import { CreateTodoType } from "@/@Types/TodoType";
+import useTodos from "@/hooks/useTodos";
 
-type Props = {
-  addTodo: (todo: CreateTodoType) => void;
-};
-
-export default function AddTask({ addTodo }: Props) {
+export default function AddTask() {
+  const { addTodo } = useTodos();
   const [showDrawer, setShowDrawer] = React.useState(false);
+
   return (
     <>
       <Fab
