@@ -2,12 +2,15 @@ import React from "react";
 import TodoItem from "./components/TodoItem";
 import { FlatList } from "react-native";
 import useTodos from "@/hooks/useTodos";
+import { TodoType } from "@/@Types/TodoType";
 
-export default function TodoList() {
-  const { todos, removeTodo, handleDone } = useTodos();
+type Props = {
+  todos: TodoType[];
+  removeTodo: (id: number) => void;
+  handleDone: (id: number) => void;
+};
 
-  //const notDoneTodo = todos.filter((todo) => todo.doneAt === undefined);
-
+export default function TodoList({ todos, removeTodo, handleDone }: Props) {
   return (
     <>
       <FlatList

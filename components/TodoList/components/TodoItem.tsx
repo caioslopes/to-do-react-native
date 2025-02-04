@@ -58,7 +58,7 @@ export default function TodoItem({ todo, removeTodo, handleDone }: Props) {
             <Checkbox
               value="done"
               size="lg"
-              isChecked={todo.doneAt ? true : false}
+              isChecked={todo.completed}
               onPress={() => handleDone(todo.id)}
             >
               <CheckboxIndicator className="w-7 h-7 rounded-full">

@@ -7,14 +7,9 @@ export type TodoType = IndexedType & {
   name: string;
   description: string;
   doAt: Date;
-  doneAt?: Date;
-  createdAt: Date;
-  updatedAt: Date;
+  completed: boolean;
 };
 
-export type CreateTodoType = Omit<
-  TodoType,
-  "id" | "doneAt" | "createdAt" | "updatedAt"
->;
+export type CreateTodoType = Omit<TodoType, "id" | "completed">;
 
-export type UpdateTodoType = Omit<TodoType, "id" | "createdAt" | "updatedAt">;
+export type UpdateTodoType = Omit<TodoType, "id">;

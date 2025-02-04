@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { Stack, Tabs } from "expo-router";
 
 import "@/global.css";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
@@ -11,7 +11,9 @@ export default function RootLayout() {
     <GluestackUIProvider mode="light">
       <TodosProvider>
         <StatusBar translucent backgroundColor="transparent" />
-        <Stack screenOptions={{ headerShown: false }} />
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" />
+        </Stack>
         <AddTask />
       </TodosProvider>
     </GluestackUIProvider>
