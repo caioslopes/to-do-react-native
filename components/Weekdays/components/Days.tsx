@@ -29,11 +29,7 @@ export default function Days() {
         renderItem={({ item }) => (
           <>
             <Box className="mr-3">
-              <DateButton
-                date={item.date}
-                display="weekday"
-                onPress={() => console.log(item.date)}
-              />
+              <DateButton date={item.date} display="weekday" />
             </Box>
           </>
         )}

@@ -12,6 +12,7 @@ import {
 import { Heading } from "@/components/ui/heading";
 import { CheckIcon, StarIcon, TrashIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
+import getMonthOrWeekdayName from "@/utils/getMonthOrWeekdayName";
 import React from "react";
 import { View } from "react-native";
 
@@ -22,10 +23,6 @@ type Props = {
 };
 
 export default function TodoItem({ todo, removeTodo, handleDone }: Props) {
-  const doAt = new Date(todo.doAt);
-  const day = doAt.getDay();
-  const month = doAt.toLocaleString("pt-BR", { month: "short" });
-
   return (
     <>
       <Card size="sm" variant="outline" className="rounded-2xl mb-4">
@@ -42,7 +39,8 @@ export default function TodoItem({ todo, removeTodo, handleDone }: Props) {
             </Heading>
             <Text size="sm">{todo.description}</Text>
             <Text size="sm">
-              {day} {month}
+              {todo.doAt.getDate()}{" "}
+              {getMonthOrWeekdayName(todo.doAt, "month", "short")}
             </Text>
           </Box>
 

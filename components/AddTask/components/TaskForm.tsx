@@ -1,3 +1,4 @@
+import { View, TouchableOpacity } from "react-native";
 import { CreateTodoType } from "@/@Types/TodoType";
 import { Button, ButtonText } from "@/components/ui/button";
 import {
@@ -8,110 +9,100 @@ import {
   FormControlErrorText,
 } from "@/components/ui/form-control";
 import { Input, InputField } from "@/components/ui/input";
-import React from "react";
-import { Controller, useForm } from "react-hook-form";
-import { View } from "react-native";
+import React, { useState } from "react";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 type Props = {
   addTodo: (todo: CreateTodoType) => void;
 };
 
 export default function TaskForm({ addTodo }: Props) {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      name: "",
-      description: "",
-      doAt: "",
-    },
-  });
+  const [form, setForm] = useState<CreateTodoType>({
+    name: "",
+    description: "",
+    doAt: new Date(),
+  } as CreateTodoType);
+  const [showPicker, setShowPicker] = useState(false);
 
-  function onSubmit(values: any) {
-    addTodo(values);
+  const toggleDatePicker = () => {
+    setShowPicker(!showPicker);
+  };
+
+  const onChangeDatePicker = ({ type }: any, selectedDate: any) => {
+    if (type === "set") {
+      const currentDate: any = selectedDate;
+      setForm((prev) => ({ ...prev, doAt: currentDate }));
+      toggleDatePicker();
+    } else {
+      toggleDatePicker();
+    }
+  };
+
+  function onSubmit() {
+    addTodo(form);
   }
 
   return (
     <>
       <View className="gap-3">
-        <FormControl isInvalid={errors.name ? true : false}>
+        <FormControl>
           <FormControlLabel>
             <FormControlLabelText>Titulo</FormControlLabelText>
           </FormControlLabel>
-          <Controller
-            name="name"
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input className="h-14 rounded-lg">
-                <InputField
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </Input>
-            )}
-          />
+          <Input className="h-14 rounded-lg">
+            <InputField
+              value={form.name}
+              onChangeText={(name) =>
+                setForm((prev) => ({ ...prev, name: name }))
+              }
+            />
+          </Input>
           <FormControlError>
-            {/* <FormControlErrorIcon /> */}
             <FormControlErrorText>Qual o nome da tarefa?</FormControlErrorText>
           </FormControlError>
         </FormControl>
 
-        <FormControl isInvalid={errors.description ? true : false}>
+        <FormControl>
           <FormControlLabel>
             <FormControlLabelText>Descrição</FormControlLabelText>
           </FormControlLabel>
-          <Controller
-            name="description"
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input className="h-14 rounded-lg">
-                <InputField
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </Input>
-            )}
-          />
+          <Input className="h-14 rounded-lg">
+            <InputField
+              value={form.description}
+              onChangeText={(description) =>
+                setForm((prev) => ({ ...prev, description: description }))
+              }
+            />
+          </Input>
           <FormControlError>
-            {/* <FormControlErrorIcon /> */}
             <FormControlErrorText>
               O que precisa ser feito?
             </FormControlErrorText>
           </FormControlError>
         </FormControl>
 
-        <FormControl isInvalid={errors.doAt ? true : false}>
+        <FormControl>
           <FormControlLabel>
             <FormControlLabelText>Quando</FormControlLabelText>
           </FormControlLabel>
-          <Controller
-            name="doAt"
-            control={control}
-            rules={{
-              required: true,
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input className="h-14 rounded-lg">
-                <InputField
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </Input>
-            )}
-          />
+          <Input className="h-14 rounded-lg">
+            <TouchableOpacity className="w-full" onPress={toggleDatePicker}>
+              <InputField
+                editable={false}
+                value={form.doAt.toLocaleDateString("pt-BR")}
+              />
+            </TouchableOpacity>
+          </Input>
+          {showPicker && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              mode="date"
+              display="spinner"
+              value={form.doAt}
+              onChange={onChangeDatePicker}
+            />
+          )}
           <FormControlError>
-            {/* <FormControlErrorIcon /> */}
             <FormControlErrorText>
               Para quando é esta tarefa?
             </FormControlErrorText>
@@ -123,7 +114,7 @@ export default function TaskForm({ addTodo }: Props) {
           variant="solid"
           action="primary"
           className="rounded-xl"
-          onPress={handleSubmit(onSubmit)}
+          onPress={onSubmit}
         >
           <ButtonText size="md">Adicionar tarefa</ButtonText>
         </Button>

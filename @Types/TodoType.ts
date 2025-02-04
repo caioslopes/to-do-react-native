@@ -2,7 +2,7 @@ interface IndexedType {
   [index: string]: any;
 }
 
-export type TodoType = IndexedType & {
+export type TodoType = {
   id: number;
   name: string;
   description: string;

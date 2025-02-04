@@ -5,7 +5,10 @@ import { TodoType } from "@/@Types/TodoType";
 export async function todosStoraged(): Promise<TodoType[]> {
   try {
     const todos = await AsyncStorage.getItem(TODOS);
-    return JSON.parse(todos || "[]");
+    return JSON.parse(todos || "[]", (key, value) => {
+      if (typeof key === "string" && key === "doAt") return new Date(value);
+      return value;
+    });
   } catch (error) {
     throw error;
   }
