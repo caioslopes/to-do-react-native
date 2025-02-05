@@ -11,16 +11,24 @@ import {
 import { Heading } from "@/components/ui/heading";
 import { CheckIcon, TrashIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
-import { monthOrWeekdayName } from "@/utils/cdates";
+import { monthOrWeekdayName } from "@/utils/cDates";
 import React from "react";
 
 type Props = {
   todo: TodoType;
-  removeTodo: (id: number) => void;
-  handleDone: (id: number) => void;
+  remove: (id: number) => void;
+  update: (index: number, element: Omit<TodoType, "id">) => void;
 };
 
-export default function TodoItem({ todo, removeTodo, handleDone }: Props) {
+export default function TodoItem({ todo, remove, update }: Props) {
+  const removeTodo = () => {
+    remove(todo.id);
+  };
+
+  const handleDone = () => {
+    update(todo.id, { ...todo, completed: !todo.completed });
+  };
+
   return (
     <>
       <Card size="sm" variant="outline" className="rounded-2xl mb-4">
@@ -37,7 +45,7 @@ export default function TodoItem({ todo, removeTodo, handleDone }: Props) {
               value="done"
               size="sm"
               isChecked={todo.completed}
-              onPress={() => handleDone(todo.id)}
+              onPress={handleDone}
             >
               <CheckboxIndicator className="w-6 h-6 rounded-full">
                 <CheckboxIcon as={CheckIcon} />
@@ -59,7 +67,7 @@ export default function TodoItem({ todo, removeTodo, handleDone }: Props) {
           <Button
             variant="outline"
             action="negative"
-            onPress={() => removeTodo(todo.id)}
+            onPress={removeTodo}
             className="h-full"
           >
             <ButtonIcon as={TrashIcon} />

@@ -13,7 +13,7 @@ import { AddIcon } from "../ui/icon";
 import TaskForm from "./components/TaskForm";
 
 export default function AddTask() {
-  const { addTodo } = useTodos();
+  const { add } = useTodos();
   const [showDrawer, setShowDrawer] = useState(false);
 
   const openDrawer = () => {
@@ -46,7 +46,7 @@ export default function AddTask() {
             <Heading size="xl">Adicionar tarefa</Heading>
           </DrawerHeader>
           <DrawerBody>
-            <TaskForm addTodo={addTodo} successCallback={closeDrawer} />
+            <TaskForm addTodo={add} successCallback={closeDrawer} />
           </DrawerBody>
         </DrawerContent>
       </Drawer>

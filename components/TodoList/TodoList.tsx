@@ -5,23 +5,18 @@ import { TodoType } from "@/@Types/TodoType";
 
 type Props = {
   todos: TodoType[];
-  removeTodo: (id: number) => void;
-  handleDone: (id: number) => void;
+  remove: (id: number) => void;
+  update: (index: number, element: Omit<TodoType, "id">) => void;
 };
 
-export default function TodoList({ todos, removeTodo, handleDone }: Props) {
+export default function TodoList({ todos, remove, update }: Props) {
   return (
     <>
       <FlatList
         data={todos}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
-          <TodoItem
-            key={item.id}
-            todo={item}
-            removeTodo={removeTodo}
-            handleDone={handleDone}
-          />
+          <TodoItem key={item.id} todo={item} remove={remove} update={update} />
         )}
       />
     </>

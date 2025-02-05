@@ -1,6 +1,6 @@
 import DateButton from "@/components/DateButton/DateButton";
 import { Box } from "@/components/ui/box";
-import { plusDay, today } from "@/utils/cdates";
+import { plusDay, today } from "@/utils/cDates";
 import React from "react";
 import { FlatList } from "react-native";
 

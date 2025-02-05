@@ -1,92 +1,99 @@
-import { CreateTodoType, TodoType, UpdateTodoType } from "@/@Types/TodoType";
+import { TodoType } from "@/@Types/TodoType";
 import TodosContext from "@/contexts/TodosContext";
-import { storeTodos } from "@/storage/todos";
-import { compareDates } from "@/utils/cdates";
-import { useContext } from "react";
+import { storedTodos, storeTodos } from "@/storage/asyncStorage";
+import { compareDates } from "@/utils/cDates";
+import { useContext, useEffect } from "react";
 
-type FilterType = {
-  completed?: boolean;
-  doAt?: Date;
+type RepositoryFunctions = {
+  add: (element: Omit<TodoType, "id" | "completed">) => void;
+  remove: (index: number) => void;
+  update: (index: number, element: Omit<TodoType, "id">) => void;
+  findAll: (query?: Partial<TodoType>) => TodoType[];
 };
 
-type TodoHook = {
-  getTodos: (filters?: FilterType) => TodoType[];
-  addTodo: (todo: CreateTodoType) => void;
-  removeTodo: (id: number) => void;
-  handleDone: (id: number) => void;
-};
-
-export default function useTodos(): TodoHook {
-  const INCREMENT = 3;
+export default function useTodos(): RepositoryFunctions {
   const { todos, setTodos } = useContext(TodosContext);
+  const INCREMENT = 3;
 
-  function getTodos(filters?: FilterType) {
-    let data: TodoType[] = todos;
+  const add = (element: Omit<TodoType, "id" | "completed">) => {
+    todos.push(_createTodo(element));
+    setTodos([...todos]);
+    storeTodos([...todos]);
+  };
 
-    if (filters?.completed !== undefined) {
-      let completed = filters?.completed;
-      data = todos.filter((todo) => todo.completed === completed);
+  const remove = (id: number) => {
+    const index = todos.findIndex((todo) => todo.id === id);
+
+    if (index > -1) {
+      todos.splice(index, 1);
+      setTodos([...todos]);
+      storeTodos([...todos]);
     }
+  };
 
-    if (filters?.doAt !== undefined) {
-      let date =
-        typeof filters?.doAt === "string"
-          ? new Date(filters?.doAt)
-          : filters?.doAt;
+  const update = (id: number, element: Omit<TodoType, "id">) => {
+    const index = todos.findIndex((todo) => todo.id === id);
 
-      data = todos.filter((todo) => compareDates(date, todo.doAt));
+    if (index > -1) {
+      let todo = todos[index];
+
+      Object.keys(element).map((key: any) => {
+        let current = element[key];
+        if (current !== undefined) {
+          todo[key] = current;
+        }
+      });
+
+      setTodos([...todos]);
+      storeTodos([...todos]);
     }
+  };
 
-    return data;
-  }
+  const findAll = (query?: Partial<TodoType>) => {
+    let data = todos;
+    if (query) {
+      const { completed, doAt } = query;
 
-  async function addTodo(todo: CreateTodoType) {
-    const updatedTodos = [...todos];
-    const newTodo: TodoType = { ...todo } as TodoType;
-    let lastId: number = 1;
+      if (completed !== undefined) {
+        data = data.filter((d) => d.completed === completed);
+      }
+
+      if (doAt) {
+        data = data.filter((d) => compareDates(doAt, d.doAt));
+      }
+    }
+    return data.sort((a, b) => a.id - b.id);
+  };
+
+  const _loadStoredTodos = async () => {
+    const todos = await storedTodos();
+    setTodos(todos);
+  };
+
+  const _createTodo = (element: Omit<TodoType, "id" | "completed">) => {
+    let id = 1;
+    const newTodo = {} as TodoType;
 
     if (todos.length > 0) {
-      lastId = updatedTodos[updatedTodos.length - 1].id;
+      id = todos[todos.length - 1].id + INCREMENT;
     }
 
-    newTodo.id = lastId + INCREMENT;
+    newTodo.id = id;
+    newTodo.name = element.name;
+    newTodo.description = element.description;
     newTodo.completed = false;
+    newTodo.doAt = element.doAt;
 
-    updatedTodos.push(newTodo);
-
-    setTodos(updatedTodos);
-    await storeTodos(updatedTodos);
-  }
-
-  async function removeTodo(id: number) {
-    const updatedTodos = [...todos];
-    const index = updatedTodos.findIndex((todo) => todo.id === id);
-    if (index !== -1) {
-      updatedTodos.splice(index, 1);
-      setTodos(updatedTodos);
-      await storeTodos(updatedTodos);
-    }
-  }
-
-  async function handleDone(id: number) {
-    const updatedTodos = [...todos];
-    const index = updatedTodos.findIndex((todo) => todo.id === id);
-    const todo = updatedTodos[index];
-
-    if (todo.completed) {
-      todo.completed = false;
-    } else {
-      todo.completed = true;
-    }
-
-    setTodos(updatedTodos);
-    await storeTodos(updatedTodos);
-  }
-
-  return {
-    getTodos,
-    addTodo,
-    removeTodo,
-    handleDone,
+    return newTodo;
   };
+
+  useEffect(() => {
+    _loadStoredTodos();
+  }, []);
+
+  /* useEffect(() => {
+    storeTodos(todos);
+  }, [todos]); */
+
+  return { add, remove, update, findAll };
 }

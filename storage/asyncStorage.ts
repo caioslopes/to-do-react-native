@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TODOS } from "./config";
 import { TodoType } from "@/@Types/TodoType";
 
-export async function todosStoraged(): Promise<TodoType[]> {
+export async function storedTodos(): Promise<TodoType[]> {
   try {
     const todos = await AsyncStorage.getItem(TODOS);
     return JSON.parse(todos || "[]", (key, value) => {
