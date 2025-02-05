@@ -11,8 +11,10 @@ import { Fab, FabIcon } from "../ui/fab";
 import { Heading } from "../ui/heading";
 import { AddIcon } from "../ui/icon";
 import TaskForm from "./components/TaskForm";
+import { useRouter } from "expo-router";
 
 export default function AddTask() {
+  const router = useRouter();
   const { add } = useTodos();
   const [showDrawer, setShowDrawer] = useState(false);
 
@@ -22,6 +24,7 @@ export default function AddTask() {
 
   const closeDrawer = () => {
     setShowDrawer(false);
+    router.push("/(tabs)");
   };
 
   return (

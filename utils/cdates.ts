@@ -26,8 +26,9 @@ function day(date: Date): number {
   return date.getDate();
 }
 
-function plusDay(date: Date, day: number): void {
+function plusDay(date: Date, day: number): Date {
   date.setDate(date.getDate() + day);
+  return date;
 }
 
 function month(date: Date): number {

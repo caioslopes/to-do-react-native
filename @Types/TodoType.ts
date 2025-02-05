@@ -1,8 +1,7 @@
 export type TodoType = {
   [index: string]: any;
   id: number;
-  name: string;
-  description: string;
+  title: string;
   doAt: Date;
   completed: boolean;
 };

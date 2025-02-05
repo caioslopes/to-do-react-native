@@ -8,8 +8,12 @@ import {
   CheckboxIndicator,
   CheckboxIcon,
 } from "@/components/ui/checkbox";
-import { Heading } from "@/components/ui/heading";
-import { CheckIcon, TrashIcon } from "@/components/ui/icon";
+import {
+  CalendarDaysIcon,
+  CheckIcon,
+  Icon,
+  TrashIcon,
+} from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { monthOrWeekdayName } from "@/utils/cDates";
 import React from "react";
@@ -52,23 +56,25 @@ export default function TodoItem({ todo, remove, update }: Props) {
               </CheckboxIndicator>
             </Checkbox>
 
-            <Box>
-              <Heading size="md" className="mb-1">
-                {todo.name}
-              </Heading>
-              <Text size="sm">{todo.description}</Text>
-              <Text size="sm">
-                {todo.doAt.getDate()}{" "}
-                {monthOrWeekdayName(todo.doAt, "weekday", "short")}
+            <Box className="w-72">
+              <Text size="sm" className="font-bold">
+                {todo.title}
               </Text>
+              <Box className="flex flex-row gap-1">
+                <Icon as={CalendarDaysIcon} size="sm" color="#c4c4c4" />
+                <Text size="sm">
+                  {todo.doAt.getDate()}{" "}
+                  {monthOrWeekdayName(todo.doAt, "weekday", "short")}
+                </Text>
+              </Box>
             </Box>
           </Box>
 
           <Button
-            variant="outline"
+            variant="link"
             action="negative"
             onPress={removeTodo}
-            className="h-full"
+            className="h-full p-4"
           >
             <ButtonIcon as={TrashIcon} />
           </Button>

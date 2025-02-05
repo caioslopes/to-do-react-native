@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import TodosContext from "./TodosContext";
 import { TodoType } from "@/@Types/TodoType";
-import { domainParser } from "@/utils/domainParser";
-import { TodoParser } from "@/parsers/TodoParser";
 import { storeTodos } from "@/storage/asyncStorage";
+import { TodoParser } from "@/parsers/todoParser";
 
 type Props = {
   children: React.ReactNode;
@@ -32,7 +31,7 @@ export default function TodosProvider({ children }: Props) {
     const fetchedTodos = await fetchTodos();
 
     const convertedTodos = fetchedTodos.map((todo: any) =>
-      domainParser<any, TodoType, TodoParser>(todo, new TodoParser())
+      new TodoParser().parse(todo)
     );
 
     return convertedTodos;
@@ -44,7 +43,10 @@ export default function TodosProvider({ children }: Props) {
   };
 
   useEffect(() => {
-    loadTodos();
+    /* Populate once */
+    if (todos.length < 20) {
+      loadTodos();
+    }
   }, []);
 
   return (
