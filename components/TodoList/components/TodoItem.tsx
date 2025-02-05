@@ -7,14 +7,12 @@ import {
   Checkbox,
   CheckboxIndicator,
   CheckboxIcon,
-  CheckboxLabel,
 } from "@/components/ui/checkbox";
 import { Heading } from "@/components/ui/heading";
-import { CheckIcon, StarIcon, TrashIcon } from "@/components/ui/icon";
+import { CheckIcon, TrashIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
-import getMonthOrWeekdayName from "@/utils/getMonthOrWeekdayName";
+import { getMonthOrWeekdayName } from "@/utils/cdates";
 import React from "react";
-import { View } from "react-native";
 
 type Props = {
   todo: TodoType;
@@ -32,38 +30,40 @@ export default function TodoItem({ todo, removeTodo, handleDone }: Props) {
             <BadgeIcon as={StarIcon} />
           </Badge>
         </Box> */}
+
         <Box className="flex flex-row items-center justify-between">
-          <Box>
-            <Heading size="md" className="mb-1">
-              {todo.name}
-            </Heading>
-            <Text size="sm">{todo.description}</Text>
-            <Text size="sm">
-              {todo.doAt.getDate()}{" "}
-              {getMonthOrWeekdayName(todo.doAt, "month", "short")}
-            </Text>
-          </Box>
-
           <Box className="flex flex-row items-center gap-4">
-            <Button
-              variant="link"
-              action="negative"
-              onPress={() => removeTodo(todo.id)}
-            >
-              <ButtonIcon as={TrashIcon} />
-            </Button>
-
             <Checkbox
               value="done"
-              size="lg"
+              size="sm"
               isChecked={todo.completed}
               onPress={() => handleDone(todo.id)}
             >
-              <CheckboxIndicator className="w-7 h-7 rounded-full">
+              <CheckboxIndicator className="w-6 h-6 rounded-full">
                 <CheckboxIcon as={CheckIcon} />
               </CheckboxIndicator>
             </Checkbox>
+
+            <Box>
+              <Heading size="md" className="mb-1">
+                {todo.name}
+              </Heading>
+              <Text size="sm">{todo.description}</Text>
+              <Text size="sm">
+                {todo.doAt.getDate()}{" "}
+                {getMonthOrWeekdayName(todo.doAt, "weekday", "short")}
+              </Text>
+            </Box>
           </Box>
+
+          <Button
+            variant="outline"
+            action="negative"
+            onPress={() => removeTodo(todo.id)}
+            className="h-full"
+          >
+            <ButtonIcon as={TrashIcon} />
+          </Button>
         </Box>
       </Card>
     </>

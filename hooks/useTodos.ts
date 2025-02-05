@@ -1,6 +1,7 @@
 import { CreateTodoType, TodoType, UpdateTodoType } from "@/@Types/TodoType";
 import TodosContext from "@/contexts/TodosContext";
 import { storeTodos } from "@/storage/todos";
+import { compareDates } from "@/utils/cdates";
 import { useContext } from "react";
 
 type FilterType = {
@@ -37,20 +38,6 @@ export default function useTodos(): TodoHook {
     }
 
     return data;
-  }
-
-  function compareDates(date1: Date, date2: Date): boolean {
-    let answer = false;
-
-    if (date1.getDate() === date2.getDate()) {
-      if (date1.getMonth() === date2.getMonth()) {
-        if (date1.getFullYear() === date2.getFullYear()) {
-          answer = true;
-        }
-      }
-    }
-
-    return answer;
   }
 
   async function addTodo(todo: CreateTodoType) {

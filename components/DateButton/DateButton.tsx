@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, ButtonText } from "../ui/button";
-import getMonthOrWeekdayName from "@/utils/getMonthOrWeekdayName";
 import { IButtonProps } from "@gluestack-ui/button/lib/types";
+import { getMonthOrWeekdayName } from "@/utils/cdates";
 
 type Props = IButtonProps & {
   date: Date;
@@ -9,7 +9,12 @@ type Props = IButtonProps & {
   format?: "short" | "long" | "narrow";
 };
 
-export default function DateButton({ date, display, format, ...props }: Props) {
+export default function DateButton({
+  date,
+  display,
+  format = "short",
+  ...props
+}: Props) {
   return (
     <>
       <Button

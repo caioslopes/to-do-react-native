@@ -1,7 +1,6 @@
 import React from "react";
 import TodoItem from "./components/TodoItem";
 import { FlatList } from "react-native";
-import useTodos from "@/hooks/useTodos";
 import { TodoType } from "@/@Types/TodoType";
 
 type Props = {
