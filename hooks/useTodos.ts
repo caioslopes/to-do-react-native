@@ -28,7 +28,11 @@ export default function useTodos(): TodoHook {
     }
 
     if (filters?.doAt !== undefined) {
-      let date = filters?.doAt;
+      let date =
+        typeof filters?.doAt === "string"
+          ? new Date(filters?.doAt)
+          : filters?.doAt;
+
       data = todos.filter((todo) => compareDates(date, todo.doAt));
     }
 
@@ -45,6 +49,7 @@ export default function useTodos(): TodoHook {
         }
       }
     }
+
     return answer;
   }
 

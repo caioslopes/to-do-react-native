@@ -3,9 +3,12 @@ import TodoList from "@/components/TodoList/TodoList";
 import { Box } from "@/components/ui/box";
 import useTodos from "@/hooks/useTodos";
 import React, { useState } from "react";
+
 export default function TodosNotComplete() {
-  const [filters, setFilters] = useState({ completed: false });
   const { getTodos, removeTodo, handleDone } = useTodos();
+  const [filters, setFilters] = useState({
+    completed: false,
+  });
 
   return (
     <>

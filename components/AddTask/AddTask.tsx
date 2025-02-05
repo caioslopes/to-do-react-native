@@ -1,38 +1,42 @@
 import {
   Drawer,
   DrawerBackdrop,
+  DrawerBody,
   DrawerContent,
   DrawerHeader,
-  DrawerBody,
 } from "@/components/ui/drawer";
-import React from "react";
-import { Heading } from "../ui/heading";
+import useTodos from "@/hooks/useTodos";
+import React, { useState } from "react";
 import { Fab, FabIcon } from "../ui/fab";
+import { Heading } from "../ui/heading";
 import { AddIcon } from "../ui/icon";
 import TaskForm from "./components/TaskForm";
-import useTodos from "@/hooks/useTodos";
 
 export default function AddTask() {
   const { addTodo } = useTodos();
-  const [showDrawer, setShowDrawer] = React.useState(false);
+  const [showDrawer, setShowDrawer] = useState(false);
+
+  const openDrawer = () => {
+    setShowDrawer(true);
+  };
+
+  const closeDrawer = () => {
+    setShowDrawer(false);
+  };
 
   return (
     <>
       <Fab
-        className="z-0"
+        className="z-0 bottom-20"
         size="lg"
         placement="bottom right"
-        onPress={() => {
-          setShowDrawer(true);
-        }}
+        onPress={openDrawer}
       >
         <FabIcon as={AddIcon} />
       </Fab>
       <Drawer
         isOpen={showDrawer}
-        onClose={() => {
-          setShowDrawer(false);
-        }}
+        onClose={closeDrawer}
         size="md"
         anchor="bottom"
       >
@@ -42,7 +46,7 @@ export default function AddTask() {
             <Heading size="xl">Adicionar tarefa</Heading>
           </DrawerHeader>
           <DrawerBody>
-            <TaskForm addTodo={addTodo} />
+            <TaskForm addTodo={addTodo} successCallback={closeDrawer} />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
