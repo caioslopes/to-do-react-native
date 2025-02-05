@@ -62,7 +62,7 @@ export default function useTodos(): RepositoryFunctions {
         data = data.filter((d) => compareDates(doAt, d.doAt));
       }
     }
-    return data.sort((a, b) => a.id - b.id);
+    return data.sort((a, b) => b.id - a.id);
   };
 
   const _loadStoredTodos = async () => {
