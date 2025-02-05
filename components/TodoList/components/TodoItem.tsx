@@ -11,7 +11,7 @@ import {
 import { Heading } from "@/components/ui/heading";
 import { CheckIcon, TrashIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
-import { getMonthOrWeekdayName } from "@/utils/cdates";
+import { monthOrWeekdayName } from "@/utils/cdates";
 import React from "react";
 
 type Props = {
@@ -51,7 +51,7 @@ export default function TodoItem({ todo, removeTodo, handleDone }: Props) {
               <Text size="sm">{todo.description}</Text>
               <Text size="sm">
                 {todo.doAt.getDate()}{" "}
-                {getMonthOrWeekdayName(todo.doAt, "weekday", "short")}
+                {monthOrWeekdayName(todo.doAt, "weekday", "short")}
               </Text>
             </Box>
           </Box>

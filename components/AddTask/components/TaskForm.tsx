@@ -12,7 +12,6 @@ import { Input, InputField } from "@/components/ui/input";
 import React, { useState } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Textarea, TextareaInput } from "@/components/ui/textarea";
-import { Box } from "@/components/ui/box";
 import { HStack } from "@/components/ui/hstack";
 import { AddIcon, CalendarDaysIcon } from "@/components/ui/icon";
 

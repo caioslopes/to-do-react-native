@@ -1,4 +1,14 @@
-function getMonthOrWeekdayName(
+function UTCBR(date: Date): void {
+  date.setHours(date.getHours() - 3);
+}
+
+function today() {
+  const date = new Date();
+  UTCBR(date);
+  return date;
+}
+
+function monthOrWeekdayName(
   date: Date,
   display: "weekday" | "month",
   format: "short" | "long" | "narrow"
@@ -16,11 +26,29 @@ function day(date: Date): number {
   return date.getDate();
 }
 
+function plusDay(date: Date, day: number): void {
+  date.setDate(date.getDate() + day);
+}
+
 function month(date: Date): number {
   if (!isDate(date)) {
     return -1;
   }
   return date.getMonth();
+}
+
+function year(date: Date): number {
+  if (!isDate(date)) {
+    return -1;
+  }
+  return date.getFullYear();
+}
+
+function weekday(date: Date): number {
+  if (!isDate(date)) {
+    return -1;
+  }
+  return date.getDay();
 }
 
 function formatDate(date: Date, format: string) {
@@ -32,6 +60,7 @@ function formatDate(date: Date, format: string) {
 
 function compareDates(date1: Date, date2: Date): boolean {
   let answer = false;
+
   if (date1.getDate() === date2.getDate()) {
     if (date1.getMonth() === date2.getMonth()) {
       if (date1.getFullYear() === date2.getFullYear()) {
@@ -54,9 +83,13 @@ function isDate(date: Object): boolean {
 }
 
 export {
-  getMonthOrWeekdayName,
+  today,
+  monthOrWeekdayName,
   day,
+  plusDay,
   month,
+  year,
+  weekday,
   formatDate,
   compareDates,
   differenceBetweenDates,

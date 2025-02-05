@@ -17,7 +17,7 @@ export default function Header({ filters, setFilters }: Props) {
         <DateButton date={new Date()} display="month" />
       </Box>
 
-      <Weekdays filters={filters} setFilters={setFilters} />
+      <Weekdays setFilters={setFilters} />
     </Box>
   );
 }

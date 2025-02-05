@@ -2,16 +2,15 @@ import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import React, { Dispatch, SetStateAction } from "react";
 import Days from "./components/Days";
-import { FilterType } from "../../views/Home/Home";
+import { FilterType } from "@/@Types/FilterType";
 
 type Props = {
-  filters: FilterType;
   setFilters: Dispatch<SetStateAction<FilterType>>;
 };
 
-export default function Weekdays({ filters, setFilters }: Props) {
-  const chooseDay = (date: Date) => {
-    setFilters((prev) => ({ ...prev, doneAt: date }));
+export default function Weekdays({ setFilters }: Props) {
+  const chooseDate = (date: Date) => {
+    setFilters((prev) => ({ ...prev, doAt: date }));
   };
 
   return (
@@ -20,7 +19,7 @@ export default function Weekdays({ filters, setFilters }: Props) {
         <Text className="font-bold" size="md">
           Semana
         </Text>
-        <Days />
+        <Days chooseDate={chooseDate} />
       </Box>
     </>
   );
