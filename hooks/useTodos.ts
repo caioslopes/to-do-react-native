@@ -1,8 +1,8 @@
 import { TodoType } from "@/@Types/TodoType";
 import TodosContext from "@/contexts/TodosContext";
-import { storedTodos, storeTodos } from "@/storage/asyncStorage";
+import { storeTodos } from "@/storage/asyncStorage";
 import { compareDates } from "@/utils/cDates";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 type RepositoryFunctions = {
   add: (element: Omit<TodoType, "id" | "completed">) => void;
@@ -65,11 +65,6 @@ export default function useTodos(): RepositoryFunctions {
     return data.sort((a, b) => b.id - a.id);
   };
 
-  /* const _loadStoredTodos = async () => {
-    const todos = await storedTodos();
-    setTodos(todos);
-  }; */
-
   const _createTodo = (element: Omit<TodoType, "id" | "completed">) => {
     let id = 1;
     const newTodo = {} as TodoType;
@@ -85,14 +80,6 @@ export default function useTodos(): RepositoryFunctions {
 
     return newTodo;
   };
-
-  /* useEffect(() => {
-    _loadStoredTodos();
-  }, []); */
-
-  useEffect(() => {
-    storeTodos(todos);
-  }, [todos]);
 
   return { add, remove, update, findAll };
 }

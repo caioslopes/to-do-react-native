@@ -9,11 +9,11 @@ import React, { useState } from "react";
 import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import { Textarea, TextareaInput } from "@/components/ui/textarea";
 import { HStack } from "@/components/ui/hstack";
 import { AddIcon, CalendarDaysIcon } from "@/components/ui/icon";
 import { TodoType } from "@/@Types/TodoType";
 import { plusDay, today } from "@/utils/cDates";
+import { Input, InputField } from "@/components/ui/input";
 
 type Props = {
   addTodo: (todo: Omit<TodoType, "id" | "completed">) => void;
@@ -54,15 +54,14 @@ export default function TaskForm({ addTodo, successCallback }: Props) {
               O que precisa ser feito?
             </FormControlLabelText>
           </FormControlLabel>
-          <Textarea className="rounded-lg">
-            <TextareaInput
-              className="text-start align-top"
+          <Input className="h-14 rounded-lg">
+            <InputField
               value={form.title}
               onChangeText={(title) =>
                 setForm((prev) => ({ ...prev, title: title }))
               }
             />
-          </Textarea>
+          </Input>
           {/* <FormControlError>
             <FormControlErrorText>Qual o nome da tarefa?</FormControlErrorText>
           </FormControlError> */}
@@ -76,20 +75,20 @@ export default function TaskForm({ addTodo, successCallback }: Props) {
           <HStack space="sm">
             <Button
               variant="outline"
+              className="h-14 rounded-lg flex-1"
+              onPress={toggleDatePicker}
+            >
+              <ButtonIcon as={CalendarDaysIcon} />
+              <ButtonText>{form.doAt.toLocaleDateString("pt-BR")}</ButtonText>
+            </Button>
+            <Button
+              variant="outline"
               className="h-14 rounded-lg"
               onPress={() =>
                 setForm((prev) => ({ ...prev, doAt: plusDay(today(), 1) }))
               }
             >
               <ButtonText>Amanhã</ButtonText>
-            </Button>
-            <Button
-              variant="outline"
-              className="h-14 rounded-lg flex-1"
-              onPress={toggleDatePicker}
-            >
-              <ButtonIcon as={CalendarDaysIcon} />
-              <ButtonText>{form.doAt.toLocaleDateString("pt-BR")}</ButtonText>
             </Button>
           </HStack>
 

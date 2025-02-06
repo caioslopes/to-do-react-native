@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TodosContext from "./TodosContext";
 import { TodoType } from "@/@Types/TodoType";
-import { storedTodos, storeTodos } from "@/storage/asyncStorage";
+import { storedTodos } from "@/storage/asyncStorage";
 import { TodoParser } from "@/parsers/todoParser";
 
 type Props = {
@@ -43,7 +43,6 @@ export default function TodosProvider({ children }: Props) {
     }
 
     setTodos(todosStoraged);
-    /* storeTodos(todosStoraged); */
   };
 
   useEffect(() => {

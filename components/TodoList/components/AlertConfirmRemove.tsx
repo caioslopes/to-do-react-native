@@ -51,8 +51,9 @@ export default function AlertConfirmRemove({
               poderá ser desfeita. Por favor confirme se você deseja prosseguir.
             </Text>
           </AlertDialogBody>
-          <AlertDialogFooter className="">
+          <AlertDialogFooter>
             <Button
+              className="rounded-lg"
               variant="outline"
               action="secondary"
               onPress={handleClose}
@@ -61,7 +62,12 @@ export default function AlertConfirmRemove({
               <ButtonIcon as={CircleIcon} />
               <ButtonText>Manter tarefa</ButtonText>
             </Button>
-            <Button action="negative" size="sm" onPress={onConfirm}>
+            <Button
+              className="rounded-lg"
+              action="negative"
+              size="sm"
+              onPress={onConfirm}
+            >
               <ButtonIcon as={CloseCircleIcon} />
               <ButtonText>Remover tarefa</ButtonText>
             </Button>

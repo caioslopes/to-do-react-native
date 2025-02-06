@@ -1,5 +1,4 @@
 import { TodoType } from "@/@Types/TodoType";
-import { Badge, BadgeText, BadgeIcon } from "@/components/ui/badge";
 import { Box } from "@/components/ui/box";
 import { Button, ButtonIcon } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -16,11 +15,10 @@ import {
 } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { monthOrWeekdayName } from "@/utils/cDates";
-import React, { ReactElement } from "react";
+import React from "react";
 
 type Props = {
   todo: TodoType;
-  remove: (id: number) => void;
   update: (index: number, element: Omit<TodoType, "id">) => void;
   feedback: {
     taskDone?: () => void;
@@ -29,7 +27,7 @@ type Props = {
   };
 };
 
-export default function TodoItem({ todo, remove, update, feedback }: Props) {
+export default function TodoItem({ todo, update, feedback }: Props) {
   const removeTodo = () => {
     feedback.removeTask(todo);
   };
@@ -57,13 +55,6 @@ export default function TodoItem({ todo, remove, update, feedback }: Props) {
           todo.completed ? "bg-secondary-100" : ""
         }`}
       >
-        {/* <Box className="w-16">
-          <Badge size="sm" variant="solid" action="success" className="gap-1">
-            <BadgeText>Novo</BadgeText>
-            <BadgeIcon as={StarIcon} />
-          </Badge>
-        </Box> */}
-
         <Box className="flex flex-row items-center justify-between">
           <Box className="flex flex-row items-center gap-4">
             <Checkbox

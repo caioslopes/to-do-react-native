@@ -90,7 +90,6 @@ export default function TodoList({ todos, remove, update }: Props) {
           <TodoItem
             key={item.id}
             todo={item}
-            remove={remove}
             update={update}
             feedback={{
               taskDone: showTaskDone,

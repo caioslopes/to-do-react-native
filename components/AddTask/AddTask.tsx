@@ -12,7 +12,7 @@ import { Heading } from "../ui/heading";
 import { AddIcon, CheckCircleIcon, Icon } from "../ui/icon";
 import TaskForm from "./components/TaskForm";
 import { useRouter } from "expo-router";
-import { Toast, ToastDescription, ToastTitle, useToast } from "../ui/toast";
+import { Toast, ToastTitle, useToast } from "../ui/toast";
 
 export default function AddTask() {
   const toast = useToast();
@@ -55,7 +55,7 @@ export default function AddTask() {
   return (
     <>
       <Fab
-        className="z-0 bottom-16"
+        className="z-0 bottom-safe-offset-20"
         size="lg"
         placement="bottom right"
         onPress={openDrawer}
