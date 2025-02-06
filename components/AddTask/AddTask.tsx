@@ -29,7 +29,7 @@ export default function AddTask() {
   return (
     <>
       <Fab
-        className="z-0 bottom-20"
+        className="z-0 bottom-16"
         size="lg"
         placement="bottom right"
         onPress={openDrawer}

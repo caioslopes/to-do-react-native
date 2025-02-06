@@ -9,8 +9,8 @@ export default function TodosComplete() {
   const { findAll, remove, update } = useTodos();
 
   return (
-    <Box className="p-6 flex-1 rounded-tl-2xl rounded-tr-2xl bg-white">
-      <Heading>Já feitos</Heading>
+    <Box className="pl-6 pr-6 pt-6 flex-1 rounded-tl-2xl rounded-tr-2xl bg-white">
+      <Heading className="mb-3">Já feitos</Heading>
       <TodoList
         todos={findAll({ completed: true } as Partial<TodoType>)}
         remove={remove}

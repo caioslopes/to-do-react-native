@@ -15,8 +15,8 @@ export default function TodosNotComplete() {
   return (
     <>
       <Header setFilters={setFilters} />
-      <Box className="p-6 flex-1 rounded-tl-2xl rounded-tr-2xl bg-white">
-        <Heading>Para fazer</Heading>
+      <Box className="pl-6 pr-6 pt-6 flex-1 rounded-tl-2xl rounded-tr-2xl bg-white">
+        <Heading className="mb-3">Para fazer</Heading>
         <TodoList todos={findAll(filters)} remove={remove} update={update} />
       </Box>
     </>

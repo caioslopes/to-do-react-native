@@ -38,7 +38,7 @@ export default function TodoItem({ todo, remove, update }: Props) {
       <Card
         size="sm"
         variant="outline"
-        className={`rounded-2xl mb-4 ${
+        className={`rounded-2xl mb-6 ${
           todo.completed ? "bg-secondary-100" : ""
         }`}
       >
