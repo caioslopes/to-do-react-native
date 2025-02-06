@@ -35,7 +35,13 @@ export default function TodoItem({ todo, remove, update }: Props) {
 
   return (
     <>
-      <Card size="sm" variant="outline" className="rounded-2xl mb-4">
+      <Card
+        size="sm"
+        variant="outline"
+        className={`rounded-2xl mb-4 ${
+          todo.completed ? "bg-secondary-100" : ""
+        }`}
+      >
         {/* <Box className="w-16">
           <Badge size="sm" variant="solid" action="success" className="gap-1">
             <BadgeText>Novo</BadgeText>
@@ -57,7 +63,10 @@ export default function TodoItem({ todo, remove, update }: Props) {
             </Checkbox>
 
             <Box className="w-72">
-              <Text size="sm" className="font-bold">
+              <Text
+                size="sm"
+                className={`font-bold ${todo.completed ? "line-through" : ""}`}
+              >
                 {todo.title}
               </Text>
               <Box className="flex flex-row gap-1">

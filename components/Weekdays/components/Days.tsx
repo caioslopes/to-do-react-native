@@ -1,14 +1,27 @@
 import DateButton from "@/components/DateButton/DateButton";
 import { Box } from "@/components/ui/box";
 import { plusDay, today } from "@/utils/cDates";
-import React from "react";
+import React, { useRef } from "react";
 import { FlatList } from "react-native";
 
 type Props = {
   chooseDate: (date: Date) => void;
+  clearDate: () => void;
 };
 
-export default function Days({ chooseDate }: Props) {
+export default function Days({ chooseDate, clearDate }: Props) {
+  const buttonSelected = useRef<number>(-1);
+
+  const handlePress = (date: Date, id: number) => {
+    if (buttonSelected.current === id) {
+      clearDate();
+      buttonSelected.current = -1;
+    } else {
+      chooseDate(date);
+      buttonSelected.current = id;
+    }
+  };
+
   const getWeek = () => {
     const week: { id: number; date: Date }[] = [];
 
@@ -34,7 +47,8 @@ export default function Days({ chooseDate }: Props) {
               <DateButton
                 date={item.date}
                 display="weekday"
-                onPress={() => chooseDate(item.date)}
+                onPress={() => handlePress(item.date, item.id)}
+                selected={buttonSelected.current === item.id}
               />
             </Box>
           </>

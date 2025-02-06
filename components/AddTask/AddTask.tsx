@@ -24,7 +24,6 @@ export default function AddTask() {
 
   const closeDrawer = () => {
     setShowDrawer(false);
-    router.push("/(tabs)");
   };
 
   return (
@@ -49,7 +48,13 @@ export default function AddTask() {
             <Heading size="xl">Adicionar tarefa</Heading>
           </DrawerHeader>
           <DrawerBody>
-            <TaskForm addTodo={add} successCallback={closeDrawer} />
+            <TaskForm
+              addTodo={add}
+              successCallback={() => {
+                closeDrawer();
+                router.push("/(tabs)");
+              }}
+            />
           </DrawerBody>
         </DrawerContent>
       </Drawer>

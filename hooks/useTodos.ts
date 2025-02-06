@@ -79,8 +79,7 @@ export default function useTodos(): RepositoryFunctions {
     }
 
     newTodo.id = id;
-    newTodo.name = element.name;
-    newTodo.description = element.description;
+    newTodo.title = element.title;
     newTodo.completed = false;
     newTodo.doAt = element.doAt;
 

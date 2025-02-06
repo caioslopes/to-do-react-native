@@ -44,7 +44,7 @@ export default function TodosProvider({ children }: Props) {
 
   useEffect(() => {
     /* Populate once */
-    if (todos.length < 20) {
+    if (todos.length === 0) {
       loadTodos();
     }
   }, []);
