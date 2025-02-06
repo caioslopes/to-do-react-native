@@ -16,21 +16,36 @@ import {
 } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { monthOrWeekdayName } from "@/utils/cDates";
-import React from "react";
+import React, { ReactElement } from "react";
 
 type Props = {
   todo: TodoType;
   remove: (id: number) => void;
   update: (index: number, element: Omit<TodoType, "id">) => void;
+  feedback: {
+    taskDone?: () => void;
+    taskUndone?: () => void;
+    removeTask: (todo: TodoType) => void;
+  };
 };
 
-export default function TodoItem({ todo, remove, update }: Props) {
+export default function TodoItem({ todo, remove, update, feedback }: Props) {
   const removeTodo = () => {
-    remove(todo.id);
+    feedback.removeTask(todo);
   };
 
   const handleDone = () => {
     update(todo.id, { ...todo, completed: !todo.completed });
+
+    if (todo.completed) {
+      if (feedback?.taskDone) {
+        feedback.taskDone();
+      }
+    } else {
+      if (feedback?.taskUndone) {
+        feedback.taskUndone();
+      }
+    }
   };
 
   return (
