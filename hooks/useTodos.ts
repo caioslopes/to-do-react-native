@@ -65,10 +65,10 @@ export default function useTodos(): RepositoryFunctions {
     return data.sort((a, b) => b.id - a.id);
   };
 
-  const _loadStoredTodos = async () => {
+  /* const _loadStoredTodos = async () => {
     const todos = await storedTodos();
     setTodos(todos);
-  };
+  }; */
 
   const _createTodo = (element: Omit<TodoType, "id" | "completed">) => {
     let id = 1;
@@ -86,13 +86,13 @@ export default function useTodos(): RepositoryFunctions {
     return newTodo;
   };
 
-  useEffect(() => {
-    _loadStoredTodos();
-  }, []);
-
   /* useEffect(() => {
+    _loadStoredTodos();
+  }, []); */
+
+  useEffect(() => {
     storeTodos(todos);
-  }, [todos]); */
+  }, [todos]);
 
   return { add, remove, update, findAll };
 }

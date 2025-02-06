@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TodosContext from "./TodosContext";
 import { TodoType } from "@/@Types/TodoType";
-import { storeTodos } from "@/storage/asyncStorage";
+import { storedTodos, storeTodos } from "@/storage/asyncStorage";
 import { TodoParser } from "@/parsers/todoParser";
 
 type Props = {
@@ -29,24 +29,25 @@ export default function TodosProvider({ children }: Props) {
 
   const convertFetchedTodos = async () => {
     const fetchedTodos = await fetchTodos();
-
-    const convertedTodos = fetchedTodos.map((todo: any) =>
-      new TodoParser().parse(todo)
-    );
-
+    const parser = new TodoParser();
+    const convertedTodos = fetchedTodos.map((todo: any) => parser.parse(todo));
     return convertedTodos;
   };
 
   const loadTodos = async () => {
-    const convertedTodos = await convertFetchedTodos();
-    storeTodos(convertedTodos);
+    let todosStoraged = await storedTodos();
+
+    /* Fetch once */
+    if (todosStoraged.length === 0) {
+      todosStoraged = await convertFetchedTodos();
+    }
+
+    setTodos(todosStoraged);
+    /* storeTodos(todosStoraged); */
   };
 
   useEffect(() => {
-    /* Populate once */
-    if (todos.length === 0) {
-      loadTodos();
-    }
+    loadTodos();
   }, []);
 
   return (
