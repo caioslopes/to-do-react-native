@@ -1,11 +1,5 @@
-function UTCBR(date: Date): void {
-  date.setHours(date.getHours() - 3);
-}
-
 function today() {
-  const date = new Date();
-  UTCBR(date);
-  return date;
+  return new Date();
 }
 
 function monthOrWeekdayName(
