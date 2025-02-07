@@ -19,7 +19,7 @@ Este projeto consiste em um aplicativo mobile de lista de tarefas (To-do List).
 2. Inicie o aplicativo
    `yarn start` ou `npx expo start`
 
-A saída do comando acima exibirá um QRCode no qual você poderá executar o aplicativo em um dispositivo móvel, basta ter o aplicativo **Expo Go** instalado no dispositivo móvel.
+A saída do comando acima exibirá um QRCode. Para executar a aplicação, é necessário baixar e instalar o aplicativo **Expo Go** em um dispositivo móvel e escanear o QRCode gerado.
 
 ## Requisitos📝
 ### Principais
@@ -50,8 +50,8 @@ Para efetuar o armazenamento das informações, foi utilizado o AsyncStorage.
 
 **To-do Context & To-do Provider**
 
-Um dos desafios era poder fornecer as informações por toda a aplicação, para solucionar este problema, foi desenvolvido um contexto e um provedor.
-Este provedor foi adicionado em volta da aplicação, logo após o provedor da biblioteca de estilização `Gluestack UI`.
+Durante o desenvolvimento, um dos desafios era fornecer as informações por toda a aplicação. Para solucionar este problema, foi desenvolvido um contexto e um provedor.
+O provedor foi adicionado em volta da aplicação logo após o provedor da biblioteca de estilização `Gluestack UI`.
 
 <div>
    <img width="600" src="https://github.com/user-attachments/assets/d840b815-9d34-41c4-b5e4-772600107f07" />
@@ -61,13 +61,13 @@ Este provedor foi adicionado em volta da aplicação, logo após o provedor da b
 
 **Requisição a API**
 
-No provedor de tarefas (`TodosProvider`) possuo uma função que realiza o *fetch* a API [JSONPlaceholder](https://jsonplaceholder.typicode.com/), a função limita propositalmente a quantidade de dados. Utilizando a método `slice(0, 20)` seleciono as primeiras 20 posições do retorno.
+No provedor de tarefas (TodoProvider) há uma função que realiza o *fetch* à API [JSONPlaceholder](https://jsonplaceholder.typicode.com/). A função limita propositalmente a quantidade de dados, utilizando o método `slice(0, 20)` as primeiras 20 posições do retorno são selecionadas.
 
 **Recuperando dados do AsyncStorage**
 
-Atribuí a responsabilidade de recuperar ou popular os dados da aplicação ao `TodosProvider`.
+A responsabilidade de recuperar ou popular os dados da aplicação foi atribuída ao `TodoProvider`.
 
-Quando o *provider* for montado, o `useEffect` irá chamar a função `loadTodos()` que recupera os dados armazenados no AsyncStorage (chamando `storedTodos()`), caso não haja dados, será feito uma requisição para a API [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
+Quando o *provider* é montado, o `useEffect` chama a função `loadTodos()`, que recupera os dados armazenados no AsyncStorage (chamando `storedTodos()`). Caso não haja dados, será feito uma requisição para a API [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
 Em ambos os casos, os dados recuperados/retornados são atribuídos ao estado `[todos, setTodos]` presente no *provider*.
 
 **Manipulando dados (DAL)**
