@@ -14,7 +14,7 @@ import DateTimePicker, {
 import { HStack } from "@/components/ui/hstack";
 import { AddIcon, CalendarDaysIcon } from "@/components/ui/icon";
 import { TodoType } from "@/@Types/TodoType";
-import { plusDay, today } from "@/utils/cDates";
+import { plusDay, today } from "@/utils/cdates";
 import { Input, InputField } from "@/components/ui/input";
 
 type Props = {

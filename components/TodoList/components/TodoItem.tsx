@@ -14,7 +14,7 @@ import {
   TrashIcon,
 } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
-import { monthOrWeekdayName } from "@/utils/cDates";
+import { monthOrWeekdayName } from "@/utils/cdates";
 import React from "react";
 
 type Props = {

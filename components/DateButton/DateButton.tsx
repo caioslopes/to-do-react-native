@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, ButtonIcon, ButtonText } from "../ui/button";
-import { day, monthOrWeekdayName } from "@/utils/cDates";
+import { day, monthOrWeekdayName } from "@/utils/cdates";
 import { CloseCircleIcon } from "../ui/icon";
 
 type Props = {

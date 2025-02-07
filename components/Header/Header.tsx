@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import { Box } from "../ui/box";
 import Weekdays from "../Weekdays/Weekdays";
 import { TodoType } from "@/@Types/TodoType";
-import { day, monthOrWeekdayName, today } from "@/utils/cDates";
+import { day, monthOrWeekdayName, today } from "@/utils/cdates";
 import { Image } from "react-native";
 import { Text } from "../ui/text";
 import { Heading } from "../ui/heading";

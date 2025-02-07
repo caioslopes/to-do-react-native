@@ -1,7 +1,7 @@
 import { TodoType } from "@/@Types/TodoType";
 import TodosContext from "@/contexts/TodosContext";
 import { storeTodos } from "@/storage/asyncStorage";
-import { compareDates } from "@/utils/cDates";
+import { compareDates } from "@/utils/cdates";
 import { useContext } from "react";
 
 type RepositoryFunctions = {

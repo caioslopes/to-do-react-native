@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import TodosContext from "./TodosContext";
 import { TodoType } from "@/@Types/TodoType";
 import { storedTodos } from "@/storage/asyncStorage";
-import { TodoParser } from "@/parsers/todoParser";
+import { TodoParser } from "@/parsers/TodoParser";
 
 type Props = {
   children: React.ReactNode;
