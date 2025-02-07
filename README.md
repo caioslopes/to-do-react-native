@@ -51,7 +51,7 @@ Um dos desafios era poder fornecer as informações por toda a aplicação, para
 Este provedor foi adicionado em volta da aplicação, logo após o provedor da biblioteca de estilização `Gluestack UI`.
 
 <div>
-   <img width="600" src="https://github.com/user-attachments/assets/979f2a38-2034-415c-9aae-f0d31dcf5498" />
+   <img width="600" src="https://github.com/user-attachments/assets/d840b815-9d34-41c4-b5e4-772600107f07" />
 </div>
 
 **Populando lista de tarefas**
