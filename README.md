@@ -11,24 +11,10 @@ Este projeto consiste em um aplicativo mobile de lista de tarefas (To-do List).
    git clone https://github.com/caioslopes/to-do-react-native.git
    ```
 2. Baixe as dependências
-   ```bash
-   npm install
-   ```
-   ou
-
-   ```bash
-   yarn install
-   ```
+   `npm install` ou `yarn install`
 
 2. Inicie o aplicativo
-
-   ```bash
-    yarn start
-   ```
-   ou
-   ```bash
-    npx expo start
-   ```
+   `yarn start` ou `npx expo start`
 
 A saída do comando acima exibirá um QRCode no qual você poderá executar o aplicativo em um dispositivo móvel, basta ter o aplicativo **Expo Go** instalado no dispositivo móvel.
 
@@ -95,24 +81,21 @@ Cada modificação na lista de tarefas a nova coleção de dados é armazenada n
 
 ## Telas
 
-<div style="display: flex; gap: 10px; width: 100%">
-   <img width="200" src="https://github.com/user-attachments/assets/fb2cb5b5-e57b-4e9e-b804-f2f100cde967" />
-   <img width="200" src="https://github.com/user-attachments/assets/484b8711-bed3-4ad1-a4af-c6c952039f81" />
-   <img width="200" src="https://github.com/user-attachments/assets/9df185f0-1661-45df-b9cd-062720571a6a" />
-   <img width="200" src="https://github.com/user-attachments/assets/efc7b9d1-58ac-4a68-aeea-7f66232e381d" />
-   <img width="200" src="https://github.com/user-attachments/assets/344113b8-8aef-41b6-b516-fe57c19fd700"/>
+<div>
+   <img width="200" src="https://github.com/user-attachments/assets/e46bf8c3-35b9-4bde-98a0-591f8bc27f31" />
+   <img width="200" src="https://github.com/user-attachments/assets/bd5d79ca-9d5b-49d3-b7b5-944c7ded6c8f" />
+   <img width="200" src="https://github.com/user-attachments/assets/4f5c2bb2-0f7f-4329-a17a-9fffe0e5a4cc" />
 </div>
 
 ### Feedbacks (UX)
 
 <div style="display: flex; gap: 10px; width: 100%">
-   <img width="200" src="https://github.com/user-attachments/assets/bcf1de6b-eb21-4e87-9afa-0f35a1ad3b1c" />
-   <img width="200" src="https://github.com/user-attachments/assets/d5d3db47-d437-43e0-b9e8-2cc4479fd614" />
-   <img width="200" src="https://github.com/user-attachments/assets/eafda51a-b89a-4d74-be7e-d39290176650" />
-   <img width="200" src="https://github.com/user-attachments/assets/fc561dc5-5c91-44c6-902b-6750c8dd6a12" />
-   <img width="200" src="https://github.com/user-attachments/assets/2092aa0a-4732-4bd7-9139-fefe9776b57a" />
-   <img width="200" src="https://github.com/user-attachments/assets/f45ca015-4901-43f1-8d8b-0034394c355a" />
+   <img width="200" src="https://github.com/user-attachments/assets/19c7a247-b55b-41a8-9199-0b5dd4097dc3" />
+   <img width="200" src="https://github.com/user-attachments/assets/2d1409ec-18e5-404e-98b9-a4362ca16d05" />
+   <img width="200" src="https://github.com/user-attachments/assets/9a4e7ac8-67ce-4604-884a-1a57f110a58d" />
+   <img width="200" src="https://github.com/user-attachments/assets/dba12c8a-dea0-492f-8600-aed19faad0b0" />
+   <img width="200" src="https://github.com/user-attachments/assets/2548aaf9-5929-4190-884d-33e1348d2b29" />
+   <img width="200" src="https://github.com/user-attachments/assets/7d96e1a8-e38d-4392-934a-9fe0e1841954" />
+   <img width="200" src="https://github.com/user-attachments/assets/e15bc75d-801e-49f0-8b59-094d699aee08" />
+   <img width="200" src="https://github.com/user-attachments/assets/3266270d-81d2-47dd-b0e0-f246e4ac35c9" />
 </div>
-
-
-
