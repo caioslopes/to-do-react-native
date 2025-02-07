@@ -21,6 +21,10 @@ Este projeto consiste em um aplicativo mobile de lista de tarefas (To-do List).
 
 A saída do comando acima exibirá um QRCode. Para executar a aplicação, é necessário baixar e instalar o aplicativo **Expo Go** em um dispositivo móvel e escanear o QRCode gerado.
 
+## Instalar
+
+É possível fazer a instalação do aplicativo, apenas em dispositivos Androids. [Baixar agora](https://expo.dev/accounts/caioslopes/projects/to-do-react-native/builds/41059fc6-4d40-4c38-b326-28443bc0bf02)
+
 ## Requisitos📝
 ### Principais
 - **Adicionar tarefas:** Um campo de texto para inserir uma nova tarefa e um botão para adicionar à lista.
