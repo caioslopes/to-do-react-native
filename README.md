@@ -1,5 +1,8 @@
 
 # To-do List React Native 🗒
+<div>
+   <img width="200" src="https://github.com/user-attachments/assets/a5c48252-480d-4e00-8918-3b59f05a7f2c" />
+</div>
 
 Este projeto consiste em um aplicativo mobile de lista de tarefas (To-do List).
 
