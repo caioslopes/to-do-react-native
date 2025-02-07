@@ -48,17 +48,21 @@ Para efetuar o armazenamento das informações, foi utilizado o AsyncStorage.
 **To-do Context & To-do Provider**
 
 Um dos desafios era poder fornecer as informações por toda a aplicação, para solucionar este problema, foi desenvolvido um contexto e um provedor.
-Este provedor foi adicionado envolta da aplicação, logo após o provedor da biblioteca de estilização `Gluestack UI`.
+Este provedor foi adicionado em volta da aplicação, logo após o provedor da biblioteca de estilização `Gluestack UI`.
+
+<div>
+   <img width="600" src="https://github.com/user-attachments/assets/979f2a38-2034-415c-9aae-f0d31dcf5498" />
+</div>
 
 **Populando lista de tarefas**
 
 **Requisição a API**
 
-No provedor de tarefas (TodoProvider) possuo uma função que realiza o *fetch*   a API [JSONPlaceholder](https://jsonplaceholder.typicode.com/), a função limita propositalmente a quantidade de dados. Utilizando a método `slice(0, 20)` seleciono as primeiras 20 posições do retorno.
+No provedor de tarefas (`TodosProvider`) possuo uma função que realiza o *fetch* a API [JSONPlaceholder](https://jsonplaceholder.typicode.com/), a função limita propositalmente a quantidade de dados. Utilizando a método `slice(0, 20)` seleciono as primeiras 20 posições do retorno.
 
 **Recuperando dados do AsyncStorage**
 
-Atribuí a responsabilidade de recuperar ou popular os dados da aplicação ao `TodoProvider`.
+Atribuí a responsabilidade de recuperar ou popular os dados da aplicação ao `TodosProvider`.
 
 Quando o *provider* for montado, o `useEffect` irá chamar a função `loadTodos()` que recupera os dados armazenados no AsyncStorage (chamando `storedTodos()`), caso não haja dados, será feito uma requisição para a API [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
 Em ambos os casos, os dados recuperados/retornados são atribuídos ao estado `[todos, setTodos]` presente no *provider*.
@@ -77,7 +81,7 @@ O hook encapsula a lista de tarefas, fornecendo apenas os métodos que atuaram s
 
 **Salvando no AsyncStorage**
 
-Cada modificação na lista de tarefas a nova coleção de dados é armazenada no AsyncStorage utilizando a função `storeTodos(todos)`.
+A cada alteração na lista de tarefas, seja adição, atualização ou remoção escrevo as atualizações no AsyncStorage utilizando a função de `storeTodos(todos)`.
 
 ## Telas
 
