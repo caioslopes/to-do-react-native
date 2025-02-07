@@ -2,10 +2,12 @@ import { View } from "react-native";
 import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
 import {
   FormControl,
+  FormControlError,
+  FormControlErrorText,
   FormControlLabel,
   FormControlLabelText,
 } from "@/components/ui/form-control";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
@@ -25,6 +27,10 @@ export default function TaskForm({ addTodo, successCallback }: Props) {
     title: "",
     doAt: today(),
   } as Omit<TodoType, "id" | "completed">);
+  const [errors, setErros] = useState<{ [index: string]: string | undefined }>({
+    title: undefined,
+    doAt: undefined,
+  } as Omit<TodoType, "id" | "completed">);
   const [showPicker, setShowPicker] = useState(false);
 
   const toggleDatePicker = () => {
@@ -41,14 +47,36 @@ export default function TaskForm({ addTodo, successCallback }: Props) {
   };
 
   function onSubmit() {
+    const err: { [index: string]: string | undefined } = {};
+    Object.keys(form).map((key) => {
+      const current = form[key];
+      if (current === undefined || current === "") {
+        err[key] = "Este campo não pode estar vazio.";
+      }
+    });
+
+    if (Object.keys(err).length > 0) {
+      setErros(err);
+      return;
+    }
+
     addTodo(form);
     if (successCallback) successCallback();
   }
 
+  useEffect(() => {
+    Object.keys(form).map((key) => {
+      const current = form[key];
+      if (current !== undefined && current !== "") {
+        setErros((prev) => ({ ...prev, [key]: undefined }));
+      }
+    });
+  }, [form]);
+
   return (
     <>
       <View className="gap-3">
-        <FormControl>
+        <FormControl isInvalid={errors.title !== undefined}>
           <FormControlLabel>
             <FormControlLabelText>
               O que precisa ser feito?
@@ -62,12 +90,12 @@ export default function TaskForm({ addTodo, successCallback }: Props) {
               }
             />
           </Input>
-          {/* <FormControlError>
-            <FormControlErrorText>Qual o nome da tarefa?</FormControlErrorText>
-          </FormControlError> */}
+          <FormControlError>
+            <FormControlErrorText>{errors.title}</FormControlErrorText>
+          </FormControlError>
         </FormControl>
 
-        <FormControl>
+        <FormControl isInvalid={errors.doAt !== undefined}>
           <FormControlLabel>
             <FormControlLabelText>Quando?</FormControlLabelText>
           </FormControlLabel>
@@ -101,11 +129,9 @@ export default function TaskForm({ addTodo, successCallback }: Props) {
               onChange={onChangeDatePicker}
             />
           )}
-          {/* <FormControlError>
-            <FormControlErrorText>
-              Para quando é esta tarefa?
-            </FormControlErrorText>
-          </FormControlError> */}
+          <FormControlError>
+            <FormControlErrorText>{errors.doAt}</FormControlErrorText>
+          </FormControlError>
         </FormControl>
 
         <Button
